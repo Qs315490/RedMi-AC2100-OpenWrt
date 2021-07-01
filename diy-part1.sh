@@ -20,6 +20,6 @@ git clone --depth=1 https://github.com/mchome/openwrt-vlmcsd.git package/vlmcsd
 git clone --depth=1 https://github.com/mchome/luci-app-vlmcsd.git package/luci-app-vlmcsd
 git clone --depth=1 https://github.com/garypang13/luci-app-dnsfilter.git package/luci-app-dnsfilter
 git clone --depth=1 https://github.com/sirpdboy/luci-app-advanced.git package/luci-app-advanced
-git clone --depth=1 https://github.com/tianiue/luci-app-bypass.git package/luci-app-bypass
+#git clone --depth=1 https://github.com/tianiue/luci-app-bypass.git package/luci-app-bypass
 git clone --depth=1 https://github.com/immortalwrt/luci-app-unblockneteasemusic-mini.git package/luci-app-unblockneteasemusic-mini
 git clone --depth=1 https://github.com/awesome-openwrt/luci-app-arpbind.git package/luci-app-arpbind
