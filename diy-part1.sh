@@ -26,4 +26,3 @@ git clone --depth=1 https://github.com/sirpdboy/luci-app-advanced.git package/lu
 #git clone --depth=1 https://github.com/tianiue/luci-app-bypass.git package/luci-app-bypass
 git clone --depth=1 https://github.com/immortalwrt/luci-app-unblockneteasemusic-mini.git package/luci-app-unblockneteasemusic-mini
 git clone --depth=1 https://github.com/awesome-openwrt/luci-app-arpbind.git package/luci-app-arpbind
-git clone --depth=1 https://github.com/deplives/luci-app-turboacc.git package/luci-app-turboacc
