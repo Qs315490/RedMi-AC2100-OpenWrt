@@ -6,7 +6,7 @@
 # See /LICENSE for more information.
 #
 # https://github.com/P3TERX/Actions-OpenWrt
-# File name: diy-part1.sh
+# File name: OpenWrt-part1.sh
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
@@ -15,7 +15,8 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-sed -i '$a src-git custom https://github.com/garypang13/openwrt-packages.git' feeds.conf.default
+sed -i '$a src-git custom https://github.com/kiddin9/openwrt-packages.git' feeds.conf.default
 
 # 添加软件包源
 git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon  #新的argon主题
+git clone --depth=1 https://github.com/LGA1150/openwrt-fullconenat package/fullconenat  #全锥形Nat
