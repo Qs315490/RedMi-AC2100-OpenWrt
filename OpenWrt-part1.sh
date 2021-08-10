@@ -20,4 +20,4 @@ sed -i '$a src-git custom https://github.com/kiddin9/openwrt-packages.git' feeds
 # 添加软件包源
 git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon  #新的argon主题
 
-git clone --depth=1 https://github.com/LGA1150/openwrt-fullconenat package/fullconenat  #全锥形Nat
+#git clone --depth=1 https://github.com/LGA1150/openwrt-fullconenat package/fullconenat  #全锥形Nat
