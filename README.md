@@ -12,7 +12,7 @@ luci-app-dnsfilter # 基于dnsmasq的去广告
 luci-app-advanced # 高级设置  
 luci-app-firewall # 防火墙  
 luci-app-opkg # 包管理器  
-luci-app-passwall # 某代理  
+luci-app-bypass # 某代理  
 luci-app-upnp # upnp  
 luci-app-vlmcsd # kms的luci控制面板  
 luci-app-unblockneteasemusic-mini # 网易云音乐去灰色歌曲插件  
