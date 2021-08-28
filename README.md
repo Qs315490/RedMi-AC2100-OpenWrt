@@ -1,3 +1,33 @@
+# OpenWrt-21.02
+
+[![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/Qs315490/ReadMi-AC2100-OpenWrt/blob/master/LICENSE)
+
+红米AC2100 OpenWrt固件
+
+## 内置软件
+
+ipv6支持
+luci-theme-argon # argon主题
+luci-app-wol # 网络唤醒
+luci-app-ddns # ddns
+luci-app-dnsfilter # 基于dnsmasq的去广告
+luci-app-advanced # 高级设置
+luci-app-firewall # 防火墙
+luci-app-opkg # 包管理器
+luci-app-passwall # 某代理
+luci-app-upnp # upnp
+luci-app-vlmcsd # kms的luci控制面板
+luci-app-unblockneteasemusic-mini # 网易云音乐去灰色歌曲插件
+luci-app-arpbind # ip/mac绑定(arp绑定)
+luci-app-turboacc # 网络加速 (因为不稳定暂时去除)
+
+## 已知问题
+
+turboacc中Full Nat无法启动
+loopback无法正常工作(目前好像解决了)
+
+
+
 # Actions-OpenWrt
 
 [![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/P3TERX/Actions-OpenWrt/blob/master/LICENSE)
