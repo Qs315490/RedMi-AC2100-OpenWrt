@@ -23,3 +23,6 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 # 报错修复
 cp /usr/bin/upx /workdir/openwrt/staging_dir/host/bin/
 cp /usr/bin/upx-ucl /workdir/openwrt/staging_dir/host/bin/
+
+#允许root用户编译
+set FORCE_UNSAFE_CONFIGURE=1
