@@ -1,0 +1,17 @@
+#!/bin/sh /etc/rc.common
+#Power By Qs315490
+START=99
+
+LOCK="/etc/defsteeing.lock"
+
+setting(){
+	uci set system.@system[0].zonename='Asia/Shanghai'
+	uci set system.@system[0].timezone='CST-8'
+	uci set system.@system[0].hostname='HMAC2100'
+	uci set luci.main.mediaurlbase='/luci-static/argon'
+	touch $LOCK
+}
+
+boot(){
+	[ -f $LOCK ] && setting
+}
