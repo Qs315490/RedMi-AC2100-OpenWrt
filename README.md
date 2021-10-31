@@ -15,7 +15,7 @@ luci-app-opkg # 包管理器
 luci-app-bypass # 某代理  
 luci-app-upnp # upnp  
 luci-app-vlmcsd # kms的luci控制面板  
-luci-app-unblockneteasemusic-mini # 网易云音乐去灰色歌曲插件  
+luci-app-unblockmusic # 网易云音乐去灰色歌曲插件  
 luci-app-arpbind # ip/mac绑定(arp绑定)  
 luci-app-turboacc # 网络加速 (因为不稳定暂时去除)  
 
