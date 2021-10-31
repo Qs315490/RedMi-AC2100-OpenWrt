@@ -11,9 +11,9 @@ setting(){
 	uci set system.@system[0].timezone='CST-8'
 	uci set system.@system[0].hostname='HMAC2100'
 	uci set luci.main.mediaurlbase='/luci-static/argon'
-	touch $LOCK
 }
 
 boot(){
 	[ -f $LOCK ] || setting
+	touch $LOCK
 }
