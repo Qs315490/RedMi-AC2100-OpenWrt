@@ -22,8 +22,8 @@ on:
         default: 'master'
 
 env:
-  REPO_URL: github.event.inputs.repo_url
-  REPO_BRANCH: github.event.inputs.repo_branch
+  REPO_URL: ${{ github.event.inputs.repo_url }}
+  REPO_BRANCH: ${{ github.event.inputs.repo_branch }}
   CONFIG_FILE: OpenWrt.config
   DIY_P1_SH: OpenWrt-part1.sh
   DIY_P2_SH: OpenWrt-part2.sh
