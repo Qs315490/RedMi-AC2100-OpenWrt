@@ -5,6 +5,8 @@ START=99
 LOCK="/etc/defsteeing.lock"
 
 setting(){
+	uci set network.lan.ipaddr='192.168.0.1'
+	uci del network.globals.ula_prefix
 	uci set system.@system[0].zonename='Asia/Shanghai'
 	uci set system.@system[0].timezone='CST-8'
 	uci set system.@system[0].hostname='HMAC2100'
@@ -13,5 +15,5 @@ setting(){
 }
 
 boot(){
-	[ -f $LOCK ] && setting
+	[ -f $LOCK ] || setting
 }
