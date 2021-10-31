@@ -5,13 +5,26 @@ START=99
 LOCK="/etc/defsteeing.lock"
 
 setting(){
+	# 设置默认 IP
 	uci set network.lan.ipaddr='192.168.0.1'
+	# 删除 IPv6 前缀
 	uci del network.globals.ula_prefix
+	# 设置时区
 	uci set system.@system[0].zonename='Asia/Shanghai'
 	uci set system.@system[0].timezone='CST-8'
 	uci set system.@system[0].hostname='HMAC2100'
+	# 设置主题
 	uci set luci.main.mediaurlbase='/luci-static/argon'
-	
+	# Wifi 设置
+	uci set wireless.radio0.country='AU'
+	uci del wireless.radio0.disabled
+	uci set wireless.radio1.country='AU'
+	uci del wireless.radio1.disabled
+	# 开启 DNS 广告过滤
+	uci set dnsfilter.@dnsfilter[0].enable='1'
+	# 开启 UPNP
+	uci set upnpd.config.enabled='1'
+	# 应用设置
 	uci commit
 }
 
