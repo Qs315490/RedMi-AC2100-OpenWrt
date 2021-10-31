@@ -22,7 +22,7 @@ luci-app-turboacc # 网络加速 (因为不稳定暂时去除)
 ### 已知问题
 
 turboacc中Full Nat无法启动  
-loopback无法正常工作(目前好像解决了)
+turboacc无法正常工作
 
 
 
