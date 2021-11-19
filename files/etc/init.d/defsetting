@@ -6,7 +6,7 @@ LOCK="/etc/defsteeing.lock"
 
 setting(){
 	# 修改默认 shell
-	sed -i 's/ash/bash/g' /etc/passwd
+	sed -i 's,/ash,/bash,g' /etc/passwd
 	# 设置默认 IP
 	uci set network.lan.ipaddr='192.168.0.1'
 	# 删除 IPv6 前缀
