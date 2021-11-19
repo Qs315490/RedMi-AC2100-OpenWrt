@@ -31,6 +31,8 @@ setting(){
 }
 
 boot(){
-	[ -f $LOCK ] || setting
-	touch $LOCK
+	[ -f $LOCK ] || {
+		setting
+		touch $LOCK
+	}
 }
