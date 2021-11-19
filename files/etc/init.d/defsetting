@@ -2,7 +2,7 @@
 #Power By Qs315490
 START=99
 
-LOCK="/etc/defsteeing.lock"
+LOCK="/etc/defsetting.lock"
 
 setting(){
 	# 修改默认 shell
