@@ -30,7 +30,10 @@ setting(){
 
         # 设置主题
         if [ -e /www/luci-static/argon ]
-        uci set luci.main.mediaurlbase='/luci-static/argon'
+        then
+		uci set luci.main.mediaurlbase='/luci-static/argon'
+	fi
+
 	# 开启 DNS 广告过滤
         if [ -e /etc/config/dnsfilter ]
         then
