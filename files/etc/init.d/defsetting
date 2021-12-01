@@ -11,9 +11,6 @@ setting(){
                 sed -i 's,/ash,/bash,g' /etc/passwd
         fi
 
-        # 设置默认 IP
-        uci set network.lan.ipaddr='192.168.0.1'
-
         # 删除 IPv6 前缀
         uci del network.globals.ula_prefix
 
