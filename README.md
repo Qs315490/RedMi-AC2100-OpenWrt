@@ -6,23 +6,21 @@
 
 ipv6支持  
 luci-theme-argon # argon主题  
-luci-app-wol # 网络唤醒  
+luci-app-wolplus # 网络唤醒  
 luci-app-ddns # ddns  
 luci-app-dnsfilter # 基于dnsmasq的去广告  
 luci-app-advanced # 高级设置  
-luci-app-firewall # 防火墙  
 luci-app-opkg # 包管理器  
 luci-app-bypass # 某代理  
 luci-app-upnp # upnp  
 luci-app-vlmcsd # kms的luci控制面板  
 luci-app-unblockmusic # 网易云音乐去灰色歌曲插件  
 luci-app-arpbind # ip/mac绑定(arp绑定)  
-luci-app-turboacc # 网络加速 (因为不稳定暂时去除)  
+luci-app-turboacc # 网络加速
 
 ### 已知问题
 
 turboacc中Full Nat无法启动  
-turboacc无法正常工作
 
 
 
@@ -30,7 +28,7 @@ turboacc无法正常工作
 
 ### 已知问题
 
-WIFI会出现无法分配IP或无法联网
+暂无
 
 # Actions-OpenWrt
 
