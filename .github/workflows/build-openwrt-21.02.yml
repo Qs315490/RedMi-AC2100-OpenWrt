@@ -10,6 +10,9 @@
 
 name: Build OpenWrt-21.02
 
+on:
+  workflow_dispatch:
+
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-21.02

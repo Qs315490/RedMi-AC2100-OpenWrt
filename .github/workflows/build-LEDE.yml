@@ -10,6 +10,9 @@
 
 name: Build LEDE
 
+on:
+  workflow_dispatch:
+
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
