@@ -42,7 +42,7 @@ Build OpenWrt using GitHub Actions
 
 ## 如何使用
 
-- 点击 [Use this template](https://github.com/P3TERX/Actions-OpenWrt/generate) 按钮使用这个模板创建 repository.
+- 点击 [Use this template](https://github.com/Qs315490/RedMi-AC2100-OpenWrt/generate) 按钮使用这个模板创建 repository.
 - 使用 [Lean's OpenWrt](https://github.com/coolsnowwolf/lede) 源码生成 `.config` 文件.
 - 上传 `.config` 文件到 GitHub repository.
 - 在 Actions 页选择需要编译的版本.
