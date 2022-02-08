@@ -1,0 +1,56 @@
+#!/bin/sh
+#Power By Qs315490
+
+if [ -e /bin/bash ]
+then
+        # 修改默认 shell
+        sed -i 's,/ash,/bash,g' /etc/passwd
+fi
+
+# 删除 IPv6 前缀
+uci del network.globals.ula_prefix
+
+# 设置时区
+uci set system.@system[0].zonename='Asia/Shanghai'
+uci set system.@system[0].timezone='CST-8'
+
+hostname=`cat /proc/cpuinfo | grep machine | cut -f2 -d:`
+hostname=${hostname:1}
+if [[ "mips" == `uname -m` ]]
+then
+        uci set system.@system[0].hostname="$hostname"
+fi
+
+# 设置主题
+if [ -e /www/luci-static/argon ]
+then
+        uci set luci.main.mediaurlbase='/luci-static/argon'
+fi
+
+# 开启 DNS 广告过滤
+if [ -e /etc/config/dnsfilter ]
+then
+        uci set dnsfilter.@dnsfilter[0].enable='1'
+fi
+
+# 开启 UPNP
+if [ -e /etc/config/upnpd ]
+then
+        uci set upnpd.config.enabled='1'
+fi
+
+# Wifi 设置
+if [ -e /sys/class/net/wlan0 ]
+then
+        uci set wireless.radio0.country='AU'
+        uci del wireless.radio0.disabled
+fi
+if [ -e /sys/class/net/wlan1 ]
+then
+uci set wireless.radio1.country='AU'
+uci del wireless.radio1.disabled
+fi
+
+# 应用设置
+uci commit
+
