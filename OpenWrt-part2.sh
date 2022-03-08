@@ -22,8 +22,7 @@ sed -i 's/192.168.1.1/192.168.0.1/g' package/base-files/files/bin/config_generat
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # 报错修复
-cp /usr/bin/upx /workdir/openwrt/staging_dir/host/bin/
-cp /usr/bin/upx-ucl /workdir/openwrt/staging_dir/host/bin/
+ln -s /usr/bin/upx /workdir/openwrt/staging_dir/host/bin/
 
 #允许root用户编译
 export FORCE_UNSAFE_CONFIGURE=1
