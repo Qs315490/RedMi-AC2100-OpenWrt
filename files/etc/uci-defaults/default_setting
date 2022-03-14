@@ -1,0 +1,20 @@
+#!/bin/sh
+#Power By Qs315490
+
+# 删除 IPv6 前缀
+uci del network.globals.ula_prefix
+
+# 设置时区
+uci set system.@system[0].zonename='Asia/Shanghai'
+uci set system.@system[0].timezone='CST-8'
+
+hostname=`cat /proc/cpuinfo | grep machine | cut -f2 -d:`
+hostname=${hostname:1}
+if [[ "mips" == `uname -m` ]]
+then
+        uci set system.@system[0].hostname="$hostname"
+fi
+
+# 应用设置
+uci commit
+

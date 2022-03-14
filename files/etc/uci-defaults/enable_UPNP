@@ -1,0 +1,9 @@
+#!/bin/sh
+#Power By Qs315490
+
+# 开启 UPNP
+if [ -e /etc/config/upnpd ]
+then
+        uci set upnpd.config.enabled='1'
+        uci commit
+fi

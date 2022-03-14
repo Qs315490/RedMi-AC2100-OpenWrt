@@ -1,0 +1,9 @@
+#!/bin/sh
+#Power By Qs315490
+
+# 设置主题
+if [ -e /www/luci-static/argon ]
+then
+        uci set luci.main.mediaurlbase='/luci-static/argon'
+        uci commit
+fi

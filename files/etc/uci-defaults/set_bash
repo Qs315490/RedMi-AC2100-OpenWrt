@@ -1,0 +1,8 @@
+#!/bin/sh
+#Power By Qs315490
+
+if [ -e /bin/bash ]
+then
+        # 修改默认 shell
+        sed -i 's,/ash,/bash,g' /etc/passwd
+fi
