@@ -8,4 +8,4 @@ then
         uci set external_ip='223.5.5.5' # 即使没有公网IP也要开启UPNP
         uci commit
 fi
-/etc/init.d/miniupnpd restart
+/etc/init.d/miniupnpd reload
