@@ -20,7 +20,7 @@ luci-app-turboacc # 网络加速
 
 ### 已知问题
 
-turboacc中Full Nat无法启动  
+turboacc中Full ConeNat无法启动 安装其他软件包或手动添加防火墙规则即可
 
 
 
