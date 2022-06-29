@@ -1,11 +1,11 @@
 #!/bin/sh
 #Power By Qs315490
-
+upnp="upnpd.config"
 # 开启 UPNP
 if [ -e /etc/config/upnpd ]
 then
-        uci set upnpd.config.enabled='1'
-        uci set external_ip='223.5.5.5' # 即使没有公网IP也要开启UPNP
+        uci set $upnp.enabled='1'
+        uci set $upnp.external_ip='223.5.5.5' # 即使没有公网IP也要开启UPNP
         uci commit
 fi
 /etc/init.d/miniupnpd reload
