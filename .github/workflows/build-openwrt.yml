@@ -11,22 +11,50 @@
 name: Build OpenWrt
 
 on:
-  repository_dispatch:
   workflow_dispatch:
     inputs:
-      repo_url:
-        description: 'repo URL'
-        default: 'https://github.com/openwrt/openwrt'
+      system_name:
+        description: 系统名称
+        default: openwrt
+        required: true
+        options:
+          - openwrt
+          - lede
       repo_branch:
-        description: 'repo branch'
-        default: 'master'
-
+        description: 分支
+        required: true
+        default: master
+        options:
+        - master
+        - openwrt-22.03
+        - openwrt-21.02
+      config_file:
+        description: 配置文件
+        required: true
+        default: OpenWrt.config
+        options: 
+          - OpenWrt.config
+          - LEDE.config
+      custom_script1:
+        description: feeds下载前执行
+        required: true
+        default: OpenWrt-part1.sh
+        options:
+          - OpenWrt-part1.sh
+          - LEDE-part1.sh
+      custom_script2:
+        description: feeds下载后执行
+        required: true
+        default: OpenWrt-part2.sh
+        options:
+          - OpenWrt-part2.sh
+          - LEDE-part2.sh
 env:
-  REPO_URL: ${{ github.event.inputs.repo_url }}
-  REPO_BRANCH: ${{ github.event.inputs.repo_branch }}
-  CONFIG_FILE: OpenWrt.config
-  DIY_P1_SH: OpenWrt-part1.sh
-  DIY_P2_SH: OpenWrt-part2.sh
+  SYSTEM_NAME: ${{ inputs.system_name }}
+  REPO_BRANCH: ${{ inputs.repo_branch }}
+  CONFIG_FILE: ${{ inputs.config_file }}
+  DIY_P1_SH: ${{ inputs.custom_script1 }}
+  DIY_P2_SH: ${{ inputs.custom_script2 }}
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
@@ -40,7 +68,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
-    - name: Initialization environment
+    - name: 安装编译环境
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -53,26 +81,34 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
 
-    - name: Clone source code
+    - name: 克隆仓库源码
       working-directory: /workdir
       run: |
         df -hT $PWD
+        case $SYSTEM_NAME in
+        'lede')
+          REPO_URL='https://github.com/coolsnowwolf/lede'
+          REPO_BRANCH=master
+          ;;
+        *)
+          REPO_URL='https://github.com/openwrt/openwrt';;
+        esac
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Load custom feeds
+    - name: 加载自定义脚本1
       run: |
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
-    - name: Update feeds
+    - name: 更新 feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: Install feeds
+    - name: 安装 feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Load custom configuration
+    - name: 加载配置文件
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -80,31 +116,31 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-    - name: Download package
+    - name: 预下载包
       id: package
       run: |
         cd openwrt
         make defconfig
-        make download -j8
+        make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-    - name: Compile the firmware
+    - name: 编译固件
       id: compile
       run: |
         cd openwrt
-        echo -e "$(nproc) thread compile"
+        echo -e "使用 $(nproc) 线程编译"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
-    - name: Check space usage
+    - name: 检查空间使用
       if: (!cancelled())
       run: df -hT
 
-    - name: Upload bin directory
+    - name: 上传 bin 目录
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
@@ -120,14 +156,14 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
 
-    - name: Upload firmware directory
+    - name: 上传 firmware 目录
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-    - name: Generate release tag
+    - name: 生成 release 标签
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
@@ -137,7 +173,7 @@ jobs:
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
 
-    - name: Upload firmware to release
+    - name: 上传 firmware 到 release
       uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
@@ -153,7 +189,7 @@ jobs:
         retain_days: 1
         keep_minimum_runs: 3
 
-    - name: Remove old Releases
+    - name: 删除旧的 Releases
       uses: dev-drprasad/delete-older-releases@v0.1.0
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:

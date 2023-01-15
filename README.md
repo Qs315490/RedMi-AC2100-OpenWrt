@@ -1,9 +1,7 @@
 
 
 # 红米AC2100 OpenWrt固件
-## OpenWrt-21.02
-### 内置软件
-
+## 内置软件(需要其他插件请自行添加)
 ipv6支持  
 luci-theme-argon # argon主题  
 luci-app-wolplus # 网络唤醒  
@@ -16,17 +14,13 @@ luci-app-upnp # upnp
 luci-app-vlmcsd # kms的luci控制面板  
 luci-app-unblockmusic # 网易云音乐去灰色歌曲插件  
 luci-app-arpbind # ip/mac绑定(arp绑定)  
-luci-app-turboacc # 网络加速
+luci-app-turboacc # 网络加速(基本上没必要)
 
-### 已知问题
-
+## 已知问题
 turboacc中Full ConeNat无法启动 安装其他软件包或手动添加防火墙规则即可
 
-
-
 # 红米AC2100 LEDE固件
-
-### 已知问题
+## 已知问题
 
 暂无
 
