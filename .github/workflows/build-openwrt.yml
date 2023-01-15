@@ -17,6 +17,7 @@ on:
         description: 系统名称
         default: openwrt
         required: true
+        type: choice
         options:
           - openwrt
           - lede
@@ -24,6 +25,7 @@ on:
         description: 分支
         required: true
         default: master
+        type: choice
         options:
         - master
         - openwrt-22.03
@@ -32,6 +34,7 @@ on:
         description: 配置文件
         required: true
         default: OpenWrt.config
+        type: choice
         options: 
           - OpenWrt.config
           - LEDE.config
@@ -39,6 +42,7 @@ on:
         description: feeds下载前执行
         required: true
         default: OpenWrt-part1.sh
+        type: choice
         options:
           - OpenWrt-part1.sh
           - LEDE-part1.sh
@@ -46,6 +50,7 @@ on:
         description: feeds下载后执行
         required: true
         default: OpenWrt-part2.sh
+        type: choice
         options:
           - OpenWrt-part2.sh
           - LEDE-part2.sh
