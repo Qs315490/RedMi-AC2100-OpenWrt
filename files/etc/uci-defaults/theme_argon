@@ -7,4 +7,3 @@ then
         uci set luci.main.mediaurlbase='/luci-static/argon'
         uci commit
 fi
-/etc/init.d/uhttpd reload
