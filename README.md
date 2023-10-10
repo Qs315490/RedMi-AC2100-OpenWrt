@@ -1,23 +1,22 @@
-
-
 # 红米AC2100 OpenWrt固件
+如果需要从官方源安装内核包, 请从 `imagebuilder` 生成镜像.  
+从源码编译的固件从官方源安装内核包会报错, 需要手动强制安装.
 ## 内置软件(需要其他插件请自行添加)
 ipv6支持  
 luci-theme-argon # argon主题  
 luci-app-wolplus # 网络唤醒  
-luci-app-ddns # ddns  
-luci-app-dnsfilter # 基于dnsmasq的去广告  
+luci-app-ddns # ddns   
 luci-app-advanced # 高级设置  
-luci-app-opkg # 包管理器  
-luci-app-bypass # 某代理  
 luci-app-upnp # upnp  
 luci-app-vlmcsd # kms的luci控制面板  
-luci-app-unblockmusic # 网易云音乐去灰色歌曲插件  
 luci-app-arpbind # ip/mac绑定(arp绑定)  
-luci-app-turboacc # 网络加速(基本上没必要)
+luci-app-ttyd # 网页终端
+
+# 完全锥形网络 nat1 Full ConeNat
+手动设置防火墙wan入站为允许即可，本人测试公网IP这么设置是能nat1. 其他环境不清楚
 
 ## 已知问题
-turboacc中Full ConeNat无法启动 安装其他软件包或手动添加防火墙规则即可
+暂无
 
 # 红米AC2100 LEDE固件
 ## 已知问题
