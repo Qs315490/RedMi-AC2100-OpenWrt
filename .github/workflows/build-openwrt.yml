@@ -28,8 +28,8 @@ on:
         type: choice
         options:
         - master
-        - openwrt-22.03
-        - openwrt-21.02
+        - v22.03.5
+        - v21.02.7
       config_file:
         description: 配置文件
         required: true

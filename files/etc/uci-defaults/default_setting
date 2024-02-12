@@ -1,19 +1,50 @@
 #!/bin/sh
 #Power By Qs315490
 
-# 删除 IPv6 前缀
-uci del network.globals.ula_prefix
+system="system.@system[0]"
 
-# 设置时区
-uci set system.@system[0].zonename='Asia/Shanghai'
-uci set system.@system[0].timezone='CST-8'
+[ "$(uci -q get $system.zonename)" = "Asia/Shanghai" ] && exit 0
 
-hostname=`cat /proc/cpuinfo | grep machine | cut -f2 -d:`
-hostname=${hostname:1}
-if [[ "mips" == `uname -m` ]]
-then
-        uci set system.@system[0].hostname="$hostname"
+uci batch<<EOF
+	set $system.zonename='Asia/Shanghai'
+	set $system.timezone='CST-8'
+	set network.lan.ipaddr='192.168.0.1'
+	set network.globals.packet_steering='1'
+        # 删除 IPv6 前缀
+        # uci del network.globals.ula_prefix
+
+	commit
+EOF
+service network restart
+service system restart
+
+# 设置默认shell为bash
+if [ -e /bin/bash ];then
+	sed -i 's,/ash,/bash,g' /etc/passwd
 fi
 
-# 应用设置
-uci commit
+# 设置软件源为中科大
+sed -i 's_downloads.openwrt.org_mirrors.ustc.edu.cn/openwrt_' /etc/opkg/distfeeds.conf
+
+config="/etc/config"
+
+if [ -e $config/ttyd ];then
+	uci batch<<EOF
+	set ttyd.@ttyd[0].command='/bin/login -f root' # ttyd免登录
+	del ttyd.@ttyd[0].interface # 防止无法访问
+	commit
+EOF
+	service ttyd restart
+fi
+
+if [ -e $config/upnpd ];then
+	upnp="upnpd.config"
+	uci batch<<EOF
+	set $upnp.enabled='1'
+	set $upnp.external_ip='223.5.5.5' # 跳过公网IP验证
+	commit
+EOF
+	service miniupnpd restart
+fi
+
+exit 0
