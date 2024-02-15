@@ -23,7 +23,7 @@ addFeeds(){
 # 添加 feed 源
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 # sed -i '$a src-git custom https://github.com/kiddin9/openwrt-packages.git;master' feeds.conf.default
-addFeeds smpackage https://github.com/kenzok8/small-package
+addFeeds custom https://github.com/kenzok8/small-package
 
 # 添加软件包源
 # git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon  #新的argon主题 (custom已附带)
